@@ -5,6 +5,8 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import './globals.css'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hengdi-electric.vercel.app'
+
 const sora = Sora({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -18,6 +20,7 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Hengdi Electric | Cable Tray & Busbar Trunking Manufacturer',
     template: '%s | Hengdi Electric',
@@ -25,6 +28,15 @@ export const metadata: Metadata = {
   description:
     'Zhenjiang Hengdi Intelligent Electric Co., Ltd. — a professional manufacturer of cable tray systems, busbar trunking and switchgear. ISO 9001 certified; CCC and type-test reports available for busbar systems. OEM/ODM welcome.',
   generator: 'v0.app',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    siteName: 'Hengdi Electric',
+    title: 'Hengdi Electric | Cable Tray & Busbar Trunking Manufacturer',
+    description: 'Industrial cable tray, busbar trunking, switchgear and distribution box manufacturer.',
+    url: '/',
+    images: [{ url: '/logo.png', alt: 'Hengdi Electric' }],
+  },
   keywords: [
     'cable tray',
     'busbar trunking',
