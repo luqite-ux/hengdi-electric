@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       phone: phone || null,
       subject: subject || 'General product inquiry',
       message,
-      status: 'new',
+      status: 'unread',
     })
     if (error) throw error
     return NextResponse.json({ ok: true }, { status: 201 })
