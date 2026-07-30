@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 import { products } from '@/lib/site'
+import { getSupabaseClient, getTenantId } from '@/lib/supabase'
 
 const COUNTRIES = [
   'United States', 'United Kingdom', 'Germany', 'France', 'Australia', 'Canada',
@@ -70,10 +71,38 @@ export function ContactForm() {
     }
     setErrors({})
     setFormState('submitting')
-    // Frontend prototype — no backend connected yet.
-    // Simulate async submission delay to demonstrate all UI states.
-    await new Promise((r) => setTimeout(r, 1200))
-    // Toggle to 'error' here to demonstrate the error state locally if needed.
+    const supabase = getSupabaseClient()
+    const tenantId = getTenantId()
+    if (!supabase || !tenantId) {
+      setFormState('error')
+      return
+    }
+    const country = String(fd.get('country') || '').trim()
+    const product = String(fd.get('product') || '').trim()
+    const specs = String(fd.get('specs') || '').trim()
+    const message = String(fd.get('message') || '').trim()
+    const details = [
+      `Country/Region: ${country}`,
+      product ? `Product interest: ${product}` : '',
+      specs ? `Specifications/Quantity: ${specs}` : '',
+      '',
+      message,
+    ].filter(Boolean).join('\n')
+    const { error } = await supabase.from('inquiries').insert({
+      tenant_id: tenantId,
+      name: String(fd.get('name') || '').trim(),
+      company: String(fd.get('company') || '').trim(),
+      email: String(fd.get('email') || '').trim(),
+      phone: String(fd.get('phone') || '').trim() || null,
+      subject: product ? `Product inquiry: ${product}` : 'General product inquiry',
+      message: details,
+      status: 'new',
+    })
+    if (error) {
+      setFormState('error')
+      return
+    }
+    e.currentTarget.reset()
     setFormState('success')
   }
 
@@ -85,12 +114,8 @@ export function ContactForm() {
         </div>
         <h3 className="mt-5 text-xl font-semibold text-foreground">Inquiry Received</h3>
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-          Your message has been captured in this frontend form. We are working on backend
-          integration — in the meantime, please also send your inquiry directly to{' '}
-          <a href="mailto:641320694@qq.com" className="text-accent underline underline-offset-2">
-            641320694@qq.com
-          </a>
-          .
+          Thank you. Your inquiry has been submitted successfully. Our team will contact you
+          using the details provided.
         </p>
         <button
           type="button"

@@ -5,10 +5,14 @@ import { notFound } from 'next/navigation'
 import { ArrowRight, Check, ArrowLeft } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
-import { products } from '@/lib/site'
+import { products as fallbackProducts } from '@/lib/site'
+import { fetchProductsData, getProductBySlug } from '@/lib/products-db'
+
+export const revalidate = 60
+export const dynamicParams = true
 
 export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }))
+  return fallbackProducts.map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({
@@ -17,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const product = products.find((p) => p.slug === slug)
+  const product = await getProductBySlug(slug)
   if (!product) return { title: 'Product Not Found' }
   return { title: product.name, description: product.description }
 }
@@ -28,9 +32,10 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const product = products.find((p) => p.slug === slug)
+  const product = await getProductBySlug(slug)
   if (!product) notFound()
 
+  const products = await fetchProductsData()
   const others = products.filter((p) => p.slug !== slug)
 
   return (

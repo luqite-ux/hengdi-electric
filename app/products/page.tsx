@@ -4,7 +4,9 @@ import Image from 'next/image'
 import { ArrowRight, Check } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
-import { products } from '@/lib/site'
+import { fetchProductsData } from '@/lib/products-db'
+
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Products',
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
     'Explore Hengdi Electric products: cable tray systems, busbar trunking and switchgear for industrial, commercial and civil power distribution.',
 }
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await fetchProductsData()
   return (
     <main className="bg-gradient-mesh">
       <PageHeader
