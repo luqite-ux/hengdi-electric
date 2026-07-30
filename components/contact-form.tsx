@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 import { products } from '@/lib/site'
-import { getSupabaseClient, getTenantId } from '@/lib/supabase'
 
 const COUNTRIES = [
   'United States', 'United Kingdom', 'Germany', 'France', 'Australia', 'Canada',
@@ -71,12 +70,6 @@ export function ContactForm() {
     }
     setErrors({})
     setFormState('submitting')
-    const supabase = getSupabaseClient()
-    const tenantId = getTenantId()
-    if (!supabase || !tenantId) {
-      setFormState('error')
-      return
-    }
     const country = String(fd.get('country') || '').trim()
     const product = String(fd.get('product') || '').trim()
     const specs = String(fd.get('specs') || '').trim()
@@ -88,17 +81,19 @@ export function ContactForm() {
       '',
       message,
     ].filter(Boolean).join('\n')
-    const { error } = await supabase.from('inquiries').insert({
-      tenant_id: tenantId,
-      name: String(fd.get('name') || '').trim(),
-      company: String(fd.get('company') || '').trim(),
-      email: String(fd.get('email') || '').trim(),
-      phone: String(fd.get('phone') || '').trim() || null,
-      subject: product ? `Product inquiry: ${product}` : 'General product inquiry',
-      message: details,
-      status: 'new',
+    const response = await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: String(fd.get('name') || '').trim(),
+        company: String(fd.get('company') || '').trim(),
+        email: String(fd.get('email') || '').trim(),
+        phone: String(fd.get('phone') || '').trim(),
+        subject: product ? `Product inquiry: ${product}` : 'General product inquiry',
+        message: details,
+      }),
     })
-    if (error) {
+    if (!response.ok) {
       setFormState('error')
       return
     }
