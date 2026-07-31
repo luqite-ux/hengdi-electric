@@ -7,7 +7,7 @@ import { JsonLd } from '@/components/json-ld'
 import { buildOrganizationJsonLd } from '@/lib/seo'
 import './globals.css'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hengdi-electric.vercel.app'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hengdielectrical.com'
 
 const sora = Sora({
   subsets: ['latin'],

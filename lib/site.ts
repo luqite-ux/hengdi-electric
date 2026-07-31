@@ -12,7 +12,7 @@ export const company = {
   address: 'No. 3-1, No. 1 Sanfeng Road, Sanmao Street, Yangzhong, Zhenjiang, Jiangsu, China',
   phone: '+86 182 0528 3908',
   phoneSecondary: '+86 131 5167 2088',
-  email: '641320694@qq.com',
+  email: 'info@hengdielectrical.com',
   zip: '212200',
 }
 

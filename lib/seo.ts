@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { Article } from '@/lib/articles-db'
 import type { Product } from '@/lib/site'
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://hengdi-electric.vercel.app'
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://hengdielectrical.com'
 
 const defaultImage = `${SITE_URL}/logo.png`
 
@@ -101,7 +101,7 @@ export function buildOrganizationJsonLd() {
     alternateName: 'Hengdi Electric',
     url: SITE_URL,
     logo: defaultImage,
-    email: '641320694@qq.com',
+    email: 'info@hengdielectrical.com',
     telephone: '+86 182 0528 3908',
     address: {
       '@type': 'PostalAddress',

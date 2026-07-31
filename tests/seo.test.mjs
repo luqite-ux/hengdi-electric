@@ -1,7 +1,17 @@
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
 import test from 'node:test'
 
 const seoModule = await import('../lib/seo.ts').catch(() => ({}))
+
+test('formal domain is the SEO source of truth', () => {
+  assert.equal(seoModule.SITE_URL, 'https://hengdielectrical.com')
+  assert.equal(seoModule.buildOrganizationJsonLd().url, 'https://hengdielectrical.com')
+  assert.equal(seoModule.buildOrganizationJsonLd().email, 'info@hengdielectrical.com')
+  assert.match(fs.readFileSync('app/layout.tsx', 'utf8'), /https:\/\/hengdielectrical\.com/)
+  assert.match(fs.readFileSync('app/robots.ts', 'utf8'), /https:\/\/hengdielectrical\.com/)
+  assert.match(fs.readFileSync('app/sitemap.ts', 'utf8'), /https:\/\/hengdielectrical\.com/)
+})
 
 test('product metadata uses the product canonical URL and image', () => {
   assert.equal(typeof seoModule.buildProductMetadata, 'function')
