@@ -26,9 +26,16 @@ test('catalog asset manifest is complete and traceable', () => {
     assert.equal(entry.crop.length, 4)
     const [left, top, right, bottom] = entry.crop
     assert.ok(left >= 0 && top >= 0 && right > left && bottom > top)
-    assert.ok(top >= 0.08, `crop must exclude repeated header zone: ${entry.id}`)
-    assert.ok(bottom <= 0.94, `crop must exclude repeated footer zone: ${entry.id}`)
-    if (entry.kind === 'product') assert.match(entry.output, /^catalog\/product-cards\//)
+    if (entry.sourceImage) {
+      assert.equal(fs.existsSync(path.join(root, entry.sourceImage)), true, `generated source must exist: ${entry.id}`)
+    } else {
+      assert.ok(top >= 0.08, `crop must exclude repeated header zone: ${entry.id}`)
+      assert.ok(bottom <= 0.94, `crop must exclude repeated footer zone: ${entry.id}`)
+    }
+    if (entry.kind === 'product') {
+      assert.match(entry.output, /^catalog\/product-cards\//)
+      assert.equal('crops' in entry, false, `product card must use one dominant subject, not a collage: ${entry.id}`)
+    }
   }
 })
 

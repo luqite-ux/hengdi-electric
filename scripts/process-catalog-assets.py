@@ -27,27 +27,21 @@ def process(source_dir: Path, project_dir: Path) -> None:
     entries = json.loads(manifest_path.read_text(encoding="utf-8"))
 
     for entry in entries:
-        source = source_dir / source_name(entry["sourcePage"])
+        source = project_dir / entry["sourceImage"] if entry.get("sourceImage") else source_dir / source_name(entry["sourcePage"])
         if not source.exists():
             raise FileNotFoundError(source)
 
         with Image.open(source) as original:
-            if entry.get("crops"):
-                pieces = [original.convert("RGB").crop(normalized_crop(original, crop)) for crop in entry["crops"]]
-                tile_width, tile_height = 720, 440
-                image = Image.new("RGB", (tile_width * 2, tile_height * 2), "white")
-                three_piece_positions = [(0, 0), (tile_width, 0), (tile_width // 2, tile_height)]
-                for index, piece in enumerate(pieces):
-                    piece.thumbnail((tile_width - 48, tile_height - 48), Image.Resampling.LANCZOS)
-                    if len(pieces) == 3:
-                        cell_left, cell_top = three_piece_positions[index]
-                    else:
-                        cell_left, cell_top = (index % 2) * tile_width, (index // 2) * tile_height
-                    left = cell_left + (tile_width - piece.width) // 2
-                    top = cell_top + (tile_height - piece.height) // 2
-                    image.paste(piece, (left, top))
-            else:
-                image = original.convert("RGB").crop(normalized_crop(original, entry["crop"]))
+            image = original.convert("RGB").crop(normalized_crop(original, entry["crop"]))
+            if entry.get("canvas"):
+                scale = min(1180 / image.width, 1020 / image.height)
+                image = image.resize(
+                    (round(image.width * scale), round(image.height * scale)),
+                    Image.Resampling.LANCZOS,
+                )
+                canvas = Image.new("RGB", (1600, 1200), (243, 246, 248))
+                canvas.paste(image, ((canvas.width - image.width) // 2, (canvas.height - image.height) // 2))
+                image = canvas
             image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
             image = ImageEnhance.Contrast(image).enhance(1.04)
             image = ImageEnhance.Sharpness(image).enhance(1.08)

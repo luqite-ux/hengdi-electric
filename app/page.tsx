@@ -80,28 +80,28 @@ export default function HomePage() {
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {featuredProducts.map((p, i) => (
             <Reveal key={p.slug} delay={i * 120} as="article">
               <Link
                 href={`/products/${p.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card/50 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-[0_20px_60px_-20px] hover:shadow-primary/40"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:shadow-[0_18px_45px_-28px_rgba(15,72,143,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-border/70 bg-[#f3f6f8]">
                   <Image
                     src={p.image || '/placeholder.svg'}
                     alt={p.name}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                 </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-xl font-semibold text-foreground">{p.name}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                <div className="flex flex-1 flex-col p-6 pt-5">
+                  <h3 className="min-h-14 text-xl font-semibold leading-snug text-foreground">{p.name}</h3>
+                  <p className="mt-2 line-clamp-3 flex-1 text-sm leading-6 text-muted-foreground">
                     {p.short}
                   </p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+                  <span className="mt-5 inline-flex items-center gap-1.5 border-t border-border/70 pt-4 text-sm font-semibold text-accent">
                     View details
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </span>

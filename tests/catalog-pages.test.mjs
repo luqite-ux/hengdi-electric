@@ -12,8 +12,10 @@ test('public pages use catalog-derived imagery instead of generated showcase ass
 })
 
 test('products page renders the six verified series and detail pages render galleries', () => {
-  assert.match(read('app/products/page.tsx'), /products\.map/)
-  assert.doesNotMatch(read('app/products/page.tsx'), /productCategories/)
+  const productsPage = read('app/products/page.tsx')
+  assert.match(productsPage, /products\.map/)
+  assert.doesNotMatch(productsPage, /productCategories/)
+  assert.doesNotMatch(productsPage, /Product Series.*index|padStart/, 'cards must not show decorative series numbers')
   assert.match(read('app/products/[slug]/page.tsx'), /product\.gallery/)
 })
 
