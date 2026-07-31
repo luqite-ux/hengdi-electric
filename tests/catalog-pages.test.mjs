@@ -11,6 +11,16 @@ test('public pages use catalog-derived imagery instead of generated showcase ass
   assert.match(pages, /\/catalog\//)
 })
 
+test('homepage hero is product-led and uses only verified evidence', () => {
+  const hero = read('components/hero.tsx')
+  assert.match(hero, /\/catalog\/hero\/hengdi-product-hero\.webp/)
+  assert.match(hero, /6300A/)
+  assert.match(hero, /IP66/)
+  assert.match(hero, /15 Days/)
+  assert.match(hero, /Project-Based Quotation/)
+  assert.doesNotMatch(hero, /Live Capacity|300t|2000m|animate-trail|animate-float-slow/)
+})
+
 test('products page renders the six verified series and detail pages render galleries', () => {
   const productsPage = read('app/products/page.tsx')
   assert.match(productsPage, /products\.map/)
