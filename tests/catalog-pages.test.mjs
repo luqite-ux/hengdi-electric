@@ -11,14 +11,24 @@ test('public pages use catalog-derived imagery instead of generated showcase ass
   assert.match(pages, /\/catalog\//)
 })
 
-test('homepage hero is product-led and uses only verified evidence', () => {
+test('homepage hero uses the immersive Hengdi product scene and verified trust content', () => {
   const hero = read('components/hero.tsx')
-  assert.match(hero, /\/catalog\/hero\/hengdi-product-hero\.webp/)
-  assert.match(hero, /6300A/)
-  assert.match(hero, /IP66/)
-  assert.match(hero, /15 Days/)
+  const bridgePath = 'components/hero-product-bridge.tsx'
+  assert.equal(fs.existsSync(bridgePath), true, 'desktop product bridge must exist')
+  const bridge = read(bridgePath)
+  assert.match(hero, /hengdi-immersive-hero\.webp/)
+  assert.match(hero, /CCC Certified/)
+  assert.match(hero, /ISO 9001 Quality System/)
+  assert.match(hero, /OEM \/ ODM Available/)
+  assert.match(hero, /Cable Tray Series/)
+  assert.match(hero, /\/products\/cable-tray-series/)
+  assert.match(hero, /6 Core Product Series/)
+  assert.match(hero, /Approx\. 15-Day Lead Time/)
   assert.match(hero, /Project-Based Quotation/)
-  assert.doesNotMatch(hero, /Live Capacity|300t|2000m|animate-trail|animate-float-slow/)
+  assert.match(bridge, /Cable Tray Systems/)
+  assert.match(bridge, /Busbar Trunking/)
+  assert.match(bridge, /Switchgear (?:&|&amp;) Distribution/)
+  assert.doesNotMatch(hero, /6300A|IP66|Live Capacity|300t|2000m/)
 })
 
 test('products page renders the six verified series and detail pages render galleries', () => {

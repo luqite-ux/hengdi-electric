@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ShieldCheck, Factory, Globe, Wrench, Award, CheckCircle2 } from 'lucide-react'
 import { Hero } from '@/components/hero'
+import { HeroProductBridge } from '@/components/hero-product-bridge'
 import { Reveal } from '@/components/reveal'
 import { products, stats, certifications } from '@/lib/site'
 
@@ -46,9 +47,10 @@ export default function HomePage() {
   return (
     <main className="bg-gradient-mesh">
       <Hero />
+      <HeroProductBridge />
 
       {/* Stats */}
-      <section className="relative border-y border-border/60 bg-background/40">
+      <section className="relative border-y border-border/60 bg-background/40 lg:-mt-16 lg:pt-20">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px overflow-hidden px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
           {stats.map((s, i) => (
             <Reveal

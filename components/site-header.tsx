@@ -14,6 +14,7 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [menuState, setMenuState] = useState<MobileMenuState>({ pathname, open: false })
   const open = isMobileMenuOpen(menuState, pathname)
+  const overDarkHero = pathname === '/' && !scrolled
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16)
@@ -37,8 +38,8 @@ export function SiteHeader() {
             <Image src="/logo.png" alt="" width={32} height={32} className="object-contain" />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="text-sm font-bold tracking-tight text-foreground">Hengdi Electric</span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            <span className={cn('text-sm font-bold tracking-tight', overDarkHero ? 'text-white' : 'text-foreground')}>Hengdi Electric</span>
+            <span className={cn('text-[10px] font-medium uppercase tracking-[0.18em]', overDarkHero ? 'text-white/65' : 'text-muted-foreground')}>
               Intelligent Electric
             </span>
           </span>
@@ -53,9 +54,9 @@ export function SiteHeader() {
                 href={item.href}
                 className={cn(
                   'relative rounded-md px-4 py-2 text-sm font-medium transition-colors',
-                  active
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground',
+                  overDarkHero
+                    ? active ? 'text-white' : 'text-white/70 hover:text-white'
+                    : active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
               >
                 {item.label}
@@ -78,7 +79,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setMenuState({ pathname, open: !open })}
-            className="flex size-10 items-center justify-center rounded-md text-foreground md:hidden"
+            className={cn('flex size-10 items-center justify-center rounded-md md:hidden', overDarkHero ? 'text-white' : 'text-foreground')}
             aria-label="Toggle menu"
             aria-expanded={open}
           >
