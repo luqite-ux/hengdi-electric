@@ -32,20 +32,20 @@ export function SiteHeader() {
           : 'bg-transparent',
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center overflow-hidden rounded-lg bg-white/95 shadow-lg ring-1 ring-white/20">
-            <Image src="/logo.png" alt="" width={32} height={32} className="object-contain" />
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 md:h-[76px] lg:px-8">
+        <Link href="/" className="flex items-center gap-2.5 md:gap-3">
+          <span className="flex size-9 items-center justify-center overflow-hidden rounded-lg bg-white/95 shadow-lg ring-1 ring-white/20 md:size-11 md:rounded-xl">
+            <Image src="/logo.png" alt="" width={40} height={40} className="size-8 object-contain md:size-10" />
           </span>
           <span className="flex flex-col leading-none">
-            <span className={cn('text-sm font-bold tracking-tight', overDarkHero ? 'text-white' : 'text-foreground')}>Hengdi Electric</span>
+            <span className={cn('text-sm font-bold tracking-tight md:text-[15px]', overDarkHero ? 'text-white' : 'text-foreground')}>Hengdi Electric</span>
             <span className={cn('text-[10px] font-medium uppercase tracking-[0.18em]', overDarkHero ? 'text-white/65' : 'text-muted-foreground')}>
               Intelligent Electric
             </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 md:flex lg:gap-2">
           {nav.map((item) => {
             const active = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
             return (
@@ -53,7 +53,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'relative rounded-md px-4 py-2 text-sm font-medium transition-colors',
+                  'relative rounded-md px-3 py-2 text-sm font-medium transition-colors md:text-[15px] lg:px-4',
                   overDarkHero
                     ? active ? 'text-white' : 'text-white/70 hover:text-white'
                     : active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
@@ -71,7 +71,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_-6px] shadow-primary/70 transition-transform hover:scale-[1.03] sm:flex"
+            className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-[0_0_24px_-6px] shadow-primary/70 transition-transform hover:scale-[1.03] sm:flex md:px-5 md:py-2.5 md:text-[15px]"
           >
             <Phone className="size-4" />
             Get a Quote

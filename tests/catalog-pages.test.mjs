@@ -31,6 +31,15 @@ test('homepage hero uses the immersive Hengdi product scene and verified trust c
   assert.doesNotMatch(hero, /6300A|IP66|Live Capacity|300t|2000m/)
 })
 
+test('site header keeps mobile compact and scales up on desktop', () => {
+  const header = read('components/site-header.tsx')
+  assert.match(header, /h-16[^"\n]*md:h-\[76px\]/)
+  assert.match(header, /size-9[^\n]*md:size-11/)
+  assert.match(header, /text-sm[^'\n]*md:text-\[15px\]/)
+  assert.match(header, /md:px-5 md:py-2\.5 md:text-\[15px\]/)
+  assert.match(header, /size-10.*md:hidden/)
+})
+
 test('products page renders the six verified series and detail pages render galleries', () => {
   const productsPage = read('app/products/page.tsx')
   assert.match(productsPage, /products\.map/)
