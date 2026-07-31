@@ -4,6 +4,7 @@ import { ArrowRight, ShieldCheck, Factory, Globe, Wrench, Award, CheckCircle2 } 
 import { Hero } from '@/components/hero'
 import { HeroProductBridge } from '@/components/hero-product-bridge'
 import { Reveal } from '@/components/reveal'
+import { CountUp } from '@/components/count-up'
 import { products, stats, certifications } from '@/lib/site'
 
 const advantages = [
@@ -59,7 +60,7 @@ export default function HomePage() {
               className="px-4 py-10 text-center sm:py-12"
             >
               <div className="bg-gradient-to-r from-foreground to-accent bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl">
-                {s.value}
+                <CountUp value={s.value} />
               </div>
               <div className="mt-2 text-sm text-muted-foreground">{s.label}</div>
             </Reveal>
@@ -87,7 +88,7 @@ export default function HomePage() {
             <Reveal key={p.slug} delay={i * 120} as="article">
               <Link
                 href={`/products/${p.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:shadow-[0_18px_45px_-28px_rgba(15,72,143,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+                className="motion-card group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:shadow-[0_18px_45px_-28px_rgba(15,72,143,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
               >
                 <div className="relative aspect-[4/3] overflow-hidden border-b border-border/70 bg-[#f3f6f8]">
                   <Image
@@ -95,7 +96,7 @@ export default function HomePage() {
                     alt={p.name}
                     fill
                     sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+                    className="motion-image object-cover"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6 pt-5">

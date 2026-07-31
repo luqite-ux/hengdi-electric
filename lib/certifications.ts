@@ -3,11 +3,12 @@ export type Certificate = {
   group: 'Business Qualifications' | 'Management Systems' | 'Product Certification & Testing' | 'Enterprise Recognition'
   image: string
   scope: string
+  orientation?: 'clockwise'
 }
 
 export const certificates: Certificate[] = [
-  { title: 'Business License', group: 'Business Qualifications', image: '/catalog/certificates/business-license-1.png', scope: 'Corporate registration document supplied in the company catalog.' },
-  { title: 'Additional Business License Record', group: 'Business Qualifications', image: '/catalog/certificates/business-license-2.png', scope: 'Additional corporate registration material supplied by the company.' },
+  { title: 'Business License', group: 'Business Qualifications', image: '/catalog/certificates/business-license-1.png', scope: 'Corporate registration document supplied in the company catalog.', orientation: 'clockwise' },
+  { title: 'Additional Business License Record', group: 'Business Qualifications', image: '/catalog/certificates/business-license-2.png', scope: 'Additional corporate registration material supplied by the company.', orientation: 'clockwise' },
   { title: 'Environmental Management System', group: 'Management Systems', image: '/catalog/certificates/environment-management.png', scope: 'Management-system certificate; validity and detailed scope should be checked on the document.' },
   { title: 'Quality Management System', group: 'Management Systems', image: '/catalog/certificates/quality-management.png', scope: 'Quality management certificate shown in the supplied catalog.' },
   { title: 'Occupational Health & Safety Management', group: 'Management Systems', image: '/catalog/certificates/occupational-health.png', scope: 'Occupational health and safety management-system certificate.' },

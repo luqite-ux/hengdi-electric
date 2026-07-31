@@ -163,13 +163,73 @@
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+@keyframes motion-enter-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-scene-drift {
+  0%, 100% { transform: scale(1.01) translate3d(0, 0, 0); }
+  50% { transform: scale(1.035) translate3d(-0.35%, -0.45%, 0); }
+}
+
+@keyframes featured-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.motion-enter {
+  opacity: 0;
+  animation: motion-enter-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.motion-scene {
+  animation: hero-scene-drift 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+.motion-float {
+  animation: featured-float 6s ease-in-out infinite;
+}
+
+.motion-card {
+  isolation: isolate;
+  position: relative;
+}
+
+.motion-card::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: '';
+  background: linear-gradient(112deg, transparent 28%, rgb(255 255 255 / 0.42) 48%, transparent 68%);
+  transform: translateX(-135%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-card:hover::after { transform: translateX(135%); }
+.motion-image { transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1); }
+.motion-card:hover .motion-image { transform: scale(1.035); }
+.motion-nav-link { transition: color 0.25s ease, transform 0.25s ease; }
+.motion-nav-link:hover { transform: translateY(-1px); }
+
 @media (prefers-reduced-motion: reduce) {
   .animate-trail,
   .animate-float-slow,
   .animate-pulse-glow,
-  .animate-grid {
+  .animate-grid,
+  .motion-enter,
+  .motion-scene,
+  .motion-float {
     animation: none;
   }
+  .motion-enter { opacity: 1; transform: none; }
+  .motion-card::after { display: none; }
+  .motion-image,
+  .motion-nav-link { transition: none; }
+  .motion-card:hover .motion-image,
+  .motion-nav-link:hover { transform: none; }
   .reveal {
     opacity: 1;
   }

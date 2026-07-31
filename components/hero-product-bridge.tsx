@@ -11,10 +11,10 @@ const productGroups = [
 export function HeroProductBridge() {
   return (
     <div className="relative z-10 mx-auto -mt-12 hidden max-w-7xl grid-cols-3 gap-3 px-8 lg:grid">
-      {productGroups.map((group) => (
-        <Link key={group.title} href={group.href} className="group flex min-h-32 items-center gap-4 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_20px_55px_-30px_rgba(3,19,41,.55)] transition hover:-translate-y-1 hover:border-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">
+      {productGroups.map((group, index) => (
+        <Link key={group.title} href={group.href} className="motion-card motion-enter group flex min-h-32 items-center gap-4 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_20px_55px_-30px_rgba(3,19,41,.55)] transition hover:-translate-y-1 hover:border-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500" style={{ animationDelay: `${650 + index * 110}ms` }}>
           <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl bg-[#f3f6f8]">
-            <Image src={group.image} alt={group.title} fill sizes="128px" className="object-cover transition duration-500 group-hover:scale-105" />
+            <Image src={group.image} alt={group.title} fill sizes="128px" className="motion-image object-cover" />
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-700">Product Series</p>

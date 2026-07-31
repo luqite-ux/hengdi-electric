@@ -45,6 +45,30 @@ test('global content container is widened to 96rem for large screens', () => {
   assert.match(css, /\.max-w-7xl\s*\{[^}]*max-width:\s*96rem/, 'globals.css must widen max-w-7xl to 96rem')
 })
 
+test('site motion system covers hero, cards, counters and reduced-motion users', () => {
+  const css = read('app/globals.css')
+  const hero = read('components/hero.tsx')
+  const home = read('app/page.tsx')
+  assert.match(css, /@keyframes hero-scene-drift/)
+  assert.match(css, /\.motion-enter/)
+  assert.match(css, /\.motion-card/)
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.motion-enter/)
+  assert.match(hero, /motion-scene/)
+  assert.match(hero, /motion-enter/)
+  assert.match(home, /CountUp/)
+  assert.equal(fs.existsSync('components/count-up.tsx'), true, 'count-up component must exist')
+})
+
+test('business licenses use orientation metadata and a landscape certificate template', () => {
+  const data = read('lib/certifications.ts')
+  const gallery = read('components/certificate-gallery.tsx')
+  assert.match(data, /orientation\?: 'clockwise'/)
+  assert.match(data, /business-license-1\.png[^\n]*orientation: 'clockwise'/)
+  assert.match(data, /business-license-2\.png[^\n]*orientation: 'clockwise'/)
+  assert.match(gallery, /landscape/)
+  assert.match(gallery, /rotate-90/)
+})
+
 test('products page renders the six verified series and detail pages render galleries', () => {
   const productsPage = read('app/products/page.tsx')
   assert.match(productsPage, /products\.map/)

@@ -21,13 +21,13 @@ export function Hero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[64%_center] sm:object-[58%_center] lg:object-center"
+        className="motion-scene object-cover object-[64%_center] sm:object-[58%_center] lg:object-center"
       />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(3,19,41,0.99)_0%,rgba(3,19,41,0.94)_32%,rgba(3,19,41,0.52)_58%,rgba(3,19,41,0.08)_100%)]" />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,19,41,0.1)_55%,rgba(3,19,41,0.96)_100%)]" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-16 left-0 w-[48%] opacity-20"
+        className="animate-grid pointer-events-none absolute inset-y-16 left-0 w-[48%] opacity-20"
         style={{
           backgroundImage:
             'linear-gradient(to right, rgba(90,210,238,.18) 1px, transparent 1px), linear-gradient(to bottom, rgba(90,210,238,.14) 1px, transparent 1px)',
@@ -39,24 +39,24 @@ export function Hero() {
       <div className="relative mx-auto flex min-h-[740px] max-w-7xl flex-col px-4 pb-32 pt-14 sm:px-6 sm:pt-20 lg:min-h-[780px] lg:px-8 lg:pb-40 lg:pt-24">
         <div className="max-w-[650px]">
           <div className="flex flex-wrap gap-2">
-            {proofPoints.map((point) => (
-              <span key={point} className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-semibold tracking-wide text-white backdrop-blur-md sm:text-xs">
+            {proofPoints.map((point, index) => (
+              <span key={point} className="motion-enter inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-semibold tracking-wide text-white backdrop-blur-md sm:text-xs" style={{ animationDelay: `${index * 90}ms` }}>
                 <BadgeCheck className="size-3.5 text-cyan-300" />
                 {point}
               </span>
             ))}
           </div>
 
-          <p className="mt-8 text-xs font-bold uppercase tracking-[0.24em] text-cyan-300">Intelligent Electric Systems</p>
-          <h1 className="mt-4 max-w-2xl text-balance text-5xl font-extrabold leading-[0.98] tracking-[-0.055em] text-white sm:text-6xl lg:text-[5rem]">
+          <p className="motion-enter mt-8 text-xs font-bold uppercase tracking-[0.24em] text-cyan-300" style={{ animationDelay: '260ms' }}>Intelligent Electric Systems</p>
+          <h1 className="motion-enter mt-4 max-w-2xl text-balance text-5xl font-extrabold leading-[0.98] tracking-[-0.055em] text-white sm:text-6xl lg:text-[5rem]" style={{ animationDelay: '340ms' }}>
             Power Distribution,
             <span className="mt-2 block bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-400 bg-clip-text text-transparent">Engineered to Last.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-white/75 sm:text-lg sm:leading-8">
+          <p className="motion-enter mt-6 max-w-xl text-pretty text-base leading-7 text-white/75 sm:text-lg sm:leading-8" style={{ animationDelay: '440ms' }}>
             {company.fullName} manufactures cable tray systems, busbar trunking and low-voltage switchgear for industrial, commercial and civil projects.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="motion-enter mt-8 flex flex-wrap items-center gap-3" style={{ animationDelay: '540ms' }}>
             <Link href="/products" className="group inline-flex items-center gap-2 rounded-full bg-cyan-400 px-6 py-3.5 text-sm font-bold text-[#031329] shadow-[0_16px_40px_-18px_rgba(34,211,238,.9)] transition hover:-translate-y-0.5 hover:bg-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#031329]">
               Explore Products
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -70,7 +70,7 @@ export function Hero() {
           </div>
         </div>
 
-        <Link href="/products/cable-tray-series" className="group mt-auto hidden w-[340px] self-end rounded-2xl border border-white/20 bg-[#061a37]/80 p-3 text-white shadow-2xl backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-300/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 lg:flex lg:items-center lg:gap-4">
+        <Link href="/products/cable-tray-series" className="motion-float group mt-auto hidden w-[340px] self-end rounded-2xl border border-white/20 bg-[#061a37]/80 p-3 text-white shadow-2xl backdrop-blur-xl transition hover:border-cyan-300/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 lg:flex lg:items-center lg:gap-4">
           <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-white">
             <Image src="/catalog/product-cards/cable-tray-series.webp" alt="Cable Tray Series" fill sizes="112px" className="object-cover" />
           </div>

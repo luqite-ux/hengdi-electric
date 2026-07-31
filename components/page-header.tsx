@@ -26,7 +26,7 @@ export function PageHeader({
       />
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         {breadcrumb && (
-          <nav className="mb-5 flex items-center gap-1.5 text-xs text-muted-foreground">
+          <nav className="motion-enter mb-5 flex items-center gap-1.5 text-xs text-muted-foreground">
             {breadcrumb.map((b, i) => (
               <span key={b.label} className="flex items-center gap-1.5">
                 {b.href ? (
@@ -42,15 +42,15 @@ export function PageHeader({
           </nav>
         )}
         {eyebrow && (
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+          <span className="motion-enter inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent" style={{ animationDelay: '80ms' }}>
             {eyebrow}
           </span>
         )}
-        <h1 className="mt-3 max-w-3xl text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h1 className="motion-enter mt-3 max-w-3xl text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl" style={{ animationDelay: '150ms' }}>
           {title}
         </h1>
         {description && (
-          <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="motion-enter mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground" style={{ animationDelay: '240ms' }}>
             {description}
           </p>
         )}
