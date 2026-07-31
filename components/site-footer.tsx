@@ -39,7 +39,7 @@ export function SiteFooter() {
         <div>
           <h3 className="text-sm font-semibold text-foreground">Products</h3>
           <ul className="mt-4 space-y-3">
-            {products.map((p) => (
+            {products.slice(0, 6).map((p) => (
               <li key={p.slug}>
                 <Link
                   href={`/products/${p.slug}`}
@@ -61,10 +61,15 @@ export function SiteFooter() {
             </li>
             <li className="flex gap-3">
               <Phone className="mt-0.5 size-4 shrink-0 text-primary" />
+              <a href={`tel:${company.phoneSecondary.replace(/\s/g, '')}`} className="hover:text-foreground">{company.phoneSecondary}</a>
+            </li>
+            <li className="flex gap-3">
+              <Phone className="mt-0.5 size-4 shrink-0 text-primary" />
               <a href={`tel:${company.phone.replace(/\s/g, '')}`} className="hover:text-foreground">
                 {company.phone}
               </a>
             </li>
+            <li className="pl-7">Postcode: {company.zip}</li>
             <li className="flex gap-3">
               <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
               <a href={`mailto:${company.email}`} className="hover:text-foreground">

@@ -59,47 +59,8 @@ export default function AboutPage() {
           <Reveal className="relative">
             <div className="absolute -inset-4 rounded-[2rem] bg-primary/15 blur-3xl" />
             <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-card/60 p-5 shadow-2xl backdrop-blur">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="relative overflow-hidden rounded-2xl border border-border/60">
-                  <Image
-                    src="/products/cable-tray.png"
-                    alt="Cable tray systems"
-                    width={420}
-                    height={280}
-                    className="aspect-[3/2] w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                  <span className="absolute bottom-2 left-3 text-xs font-semibold text-foreground">
-                    Cable Tray
-                  </span>
-                </div>
-                <div className="relative overflow-hidden rounded-2xl border border-border/60">
-                  <Image
-                    src="/products/busbar.png"
-                    alt="Busbar trunking systems"
-                    width={420}
-                    height={280}
-                    className="aspect-[3/2] w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                  <span className="absolute bottom-2 left-3 text-xs font-semibold text-foreground">
-                    Busbar Trunking
-                  </span>
-                </div>
-                <div className="relative col-span-2 overflow-hidden rounded-2xl border border-border/60">
-                  <Image
-                    src="/products/switchgear.png"
-                    alt="Switchgear and distribution boxes"
-                    width={860}
-                    height={320}
-                    className="aspect-[16/7] w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                  <span className="absolute bottom-2 left-3 text-xs font-semibold text-foreground">
-                    Switchgear &amp; Distribution
-                  </span>
-                </div>
-              </div>
+              <Image src="/catalog/company/factory-overview-render.webp" alt="Hengdi Electric factory planning rendering" width={1200} height={700} className="aspect-[16/9] w-full rounded-2xl object-cover" />
+              <p className="mt-3 text-xs text-muted-foreground">Factory planning rendering supplied in the company catalog; shown for company overview reference.</p>
             </div>
           </Reveal>
           <Reveal delay={120}>

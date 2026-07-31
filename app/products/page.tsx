@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Check } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
 import { fetchProductsData } from '@/lib/products-db'
@@ -9,69 +9,48 @@ import { buildPageMetadata } from '@/lib/seo'
 export const revalidate = 60
 
 export const metadata = buildPageMetadata({
-  title: 'Products',
-  description:
-    'Explore Hengdi Electric products: cable tray systems, busbar trunking and switchgear for industrial, commercial and civil power distribution.',
+  title: 'Product Catalog',
+  description: 'Explore verified Hengdi Electric cable tray, busbar trunking, switchgear and distribution product series.',
   path: '/products',
 })
+
+export const productCategories = ['Cable Tray Systems', 'Busbar Trunking Systems', 'Switchgear & Distribution'] as const
 
 export default async function ProductsPage() {
   const products = await fetchProductsData()
   return (
     <main className="bg-gradient-mesh">
-      <PageHeader
-        eyebrow="Product Catalog"
-        title="Engineered Power Transmission Solutions"
-        description="A complete portfolio of cable management and power distribution products, manufactured under controlled quality processes. Standards and certifications vary by product series — contact us for documentation."
-        breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Products' }]}
-      />
-
-      <section className="mx-auto max-w-7xl space-y-8 px-4 py-20 sm:px-6 lg:px-8">
-        {products.map((p, i) => (
-          <Reveal key={p.slug} as="article" delay={i * 80}>
-            <div
-              className={`grid items-center gap-8 rounded-3xl border border-border/70 bg-card/50 p-6 backdrop-blur sm:p-8 lg:grid-cols-2 lg:gap-12 ${
-                i % 2 === 1 ? 'lg:[&>div:first-child]:order-2' : ''
-              }`}
-            >
-              <div className="relative overflow-hidden rounded-2xl border border-border/60">
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={p.image || '/placeholder.svg'}
-                    alt={p.name}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
-                </div>
+      <PageHeader eyebrow="Product Catalog" title="Products from the Hengdi Catalog" description="Browse product series, model families and technical information taken from Hengdi Electric company materials." breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Products' }]} />
+      <section className="mx-auto max-w-7xl space-y-20 px-4 py-20 sm:px-6 lg:px-8">
+        {productCategories.map((category) => {
+          const categoryProducts = products.filter((p) => p.category === category)
+          if (!categoryProducts.length) return null
+          return (
+            <section key={category} id={category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
+              <Reveal>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Verified product family</p>
+                <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">{category}</h2>
+              </Reveal>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {categoryProducts.map((p, index) => (
+                  <Reveal key={p.slug} delay={index * 60} as="article">
+                    <Link href={`/products/${p.slug}`} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card/60 transition hover:-translate-y-1 hover:border-primary/60">
+                      <div className="relative aspect-[4/3] overflow-hidden bg-white">
+                        <Image src={p.image} alt={p.name} fill className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.025]" />
+                      </div>
+                      <div className="flex flex-1 flex-col p-6">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-accent">{p.subcategory}</p>
+                        <h3 className="mt-2 text-xl font-semibold text-foreground">{p.name}</h3>
+                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.short}</p>
+                        <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent">View series <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></span>
+                      </div>
+                    </Link>
+                  </Reveal>
+                ))}
               </div>
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-                  {String(i + 1).padStart(2, '0')} · Series
-                </span>
-                <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
-                  {p.name}
-                </h2>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{p.description}</p>
-                <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
-                  {p.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-sm text-foreground">
-                      <Check className="mt-0.5 size-4 shrink-0 text-accent" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/products/${p.slug}`}
-                  className="group mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_0_30px_-8px] shadow-primary/70 transition-transform hover:scale-[1.03]"
-                >
-                  View specifications
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-        ))}
+            </section>
+          )
+        })}
       </section>
     </main>
   )

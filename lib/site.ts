@@ -1,3 +1,5 @@
+import { catalogProducts } from '@/lib/catalog-products'
+
 // ---------------------------------------------------------------------------
 // Hengdi Electric — site-wide content data
 // All values must be scoped to information confirmed by company materials.
@@ -9,6 +11,7 @@ export const company = {
   tagline: 'Independent Innovation · Quality Service · Pursuit of Excellence',
   address: 'No. 3-1, No. 1 Sanfeng Road, Sanmao Street, Yangzhong, Zhenjiang, Jiangsu, China',
   phone: '+86 182 0528 3908',
+  phoneSecondary: '+86 131 5167 2088',
   email: '641320694@qq.com',
   zip: '212200',
 }
@@ -16,6 +19,7 @@ export const company = {
 export const nav = [
   { label: 'Home', href: '/' },
   { label: 'Products', href: '/products' },
+  { label: 'Certifications', href: '/certifications' },
   { label: 'News', href: '/news' },
   { label: 'About', href: '/about' },
   { label: 'FAQ', href: '/faq' },
@@ -38,6 +42,10 @@ export type Product = {
   short: string
   description: string
   image: string
+  category?: string
+  subcategory?: string
+  gallery?: string[]
+  sourcePages?: number[]
   updatedAt?: string | null
   highlights: string[]
   specs: { label: string; value: string }[]
@@ -50,7 +58,7 @@ export type Product = {
   }
 }
 
-export const products: Product[] = [
+const legacyProducts: Product[] = [
   // ── Cable Tray ─────────────────────────────────────────────────────────────
   {
     slug: 'cable-tray',
@@ -248,6 +256,11 @@ export const products: Product[] = [
     ],
   },
 ]
+
+export const products: Product[] = catalogProducts
+
+// Keep the former category summaries available only for emergency migration references.
+export const legacyProductSummaries = legacyProducts
 
 // ---------------------------------------------------------------------------
 // FAQ

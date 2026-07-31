@@ -7,7 +7,7 @@ export const revalidate = 60
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://hengdi-electric.vercel.app'
   const [products, articles] = await Promise.all([fetchProductsData(), getPublishedArticles()])
-  const routes = ['', '/products', '/news', '/about', '/faq', '/contact']
+  const routes = ['', '/products', '/certifications', '/news', '/about', '/faq', '/contact']
   return [
     ...routes.map((route) => ({ url: `${base}${route}` })),
     ...products.map((product) => ({

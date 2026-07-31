@@ -39,6 +39,9 @@ const applications = [
   'Infrastructure',
 ]
 
+const featuredSlugs = ['ladder-cable-tray', 'trough-cable-tray', 'hdcmc-t-copper-busbar', 'hdnhmc-fire-resistant-busbar', 'xl-low-voltage-switchgear', 'pz20-pz30-distribution-board']
+const featuredProducts = featuredSlugs.map((slug) => products.find((product) => product.slug === slug)).filter((product): product is (typeof products)[number] => Boolean(product))
+
 export default function HomePage() {
   return (
     <main className="bg-gradient-mesh">
@@ -78,7 +81,7 @@ export default function HomePage() {
         </Reveal>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
-          {products.map((p, i) => (
+          {featuredProducts.map((p, i) => (
             <Reveal key={p.slug} delay={i * 120} as="article">
               <Link
                 href={`/products/${p.slug}`}
@@ -148,11 +151,11 @@ export default function HomePage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="relative overflow-hidden rounded-2xl border border-border/60">
                     <Image
-                      src="/products/cable-tray.png"
+                      src="/catalog/products/ladder-cable-tray.webp"
                       alt="Cable tray systems"
                       width={420}
                       height={280}
-                      className="aspect-[3/2] w-full object-cover"
+                      className="aspect-[3/2] w-full bg-white object-contain p-1"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
                     <span className="absolute bottom-2 left-3 text-xs font-semibold text-foreground">
@@ -161,11 +164,11 @@ export default function HomePage() {
                   </div>
                   <div className="relative overflow-hidden rounded-2xl border border-border/60">
                     <Image
-                      src="/products/busbar.png"
+                      src="/catalog/products/hdcmc-t-copper-busbar.webp"
                       alt="Busbar trunking systems"
                       width={420}
                       height={280}
-                      className="aspect-[3/2] w-full object-cover"
+                      className="aspect-[3/2] w-full bg-white object-contain p-1"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
                     <span className="absolute bottom-2 left-3 text-xs font-semibold text-foreground">
@@ -174,11 +177,11 @@ export default function HomePage() {
                   </div>
                   <div className="relative col-span-2 overflow-hidden rounded-2xl border border-border/60">
                     <Image
-                      src="/products/switchgear.png"
+                      src="/catalog/products/xl-switchgear.webp"
                       alt="Switchgear and distribution boxes"
                       width={860}
                       height={320}
-                      className="aspect-[16/7] w-full object-cover"
+                      className="aspect-[16/7] w-full bg-white object-contain p-1"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
                     <span className="absolute bottom-2 left-3 text-xs font-semibold text-foreground">
@@ -224,6 +227,11 @@ export default function HomePage() {
               <span className="text-sm font-medium text-foreground">{c}</span>
             </Reveal>
           ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link href="/certifications" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-foreground">
+            View certificate archive <ArrowRight className="size-4" />
+          </Link>
         </div>
 
         {/* Applications */}

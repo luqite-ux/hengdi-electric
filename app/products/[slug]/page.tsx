@@ -71,7 +71,7 @@ export default async function ProductDetailPage({
                   src={product.image || '/placeholder.svg'}
                   alt={product.name}
                   fill
-                  className="object-cover"
+                  className="bg-white object-contain p-3"
                   priority
                 />
               </div>
@@ -122,6 +122,19 @@ export default async function ProductDetailPage({
             </div>
           </Reveal>
         </div>
+
+        {product.gallery && product.gallery.length > 1 && (
+          <Reveal className="mt-12">
+            <h2 className="text-2xl font-bold text-foreground">Catalog Gallery</h2>
+            <div className="mt-6 grid gap-5 sm:grid-cols-2">
+              {product.gallery.map((image, index) => (
+                <div key={image} className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/60 bg-white">
+                  <Image src={image} alt={`${product.name} catalog view ${index + 1}`} fill className="object-contain p-3" />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
 
         {/* Product families / series */}
         {product.families && product.families.length > 0 && (
@@ -197,7 +210,7 @@ export default async function ProductDetailPage({
         <div className="mt-24">
           <h2 className="text-2xl font-bold text-foreground">Other Product Series</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            {others.map((p, i) => (
+            {others.filter((p) => p.category === product.category).slice(0, 4).map((p, i) => (
               <Reveal key={p.slug} delay={i * 100} as="article">
                 <Link
                   href={`/products/${p.slug}`}
@@ -208,7 +221,7 @@ export default async function ProductDetailPage({
                       src={p.image || '/placeholder.svg'}
                       alt={p.name}
                       fill
-                      className="object-cover"
+                      className="bg-white object-contain p-1"
                     />
                   </div>
                   <div className="flex flex-col justify-center">

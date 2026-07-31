@@ -21,9 +21,11 @@ export default function ContactPage() {
     },
     {
       icon: Phone,
-      label: 'Phone',
-      value: company.phone,
-      href: `tel:${company.phone.replace(/\s/g, '')}`,
+      label: 'Phone 1', value: company.phone, href: `tel:${company.phone.replace(/\s/g, '')}`,
+    },
+    {
+      icon: Phone,
+      label: 'Phone 2', value: company.phoneSecondary, href: `tel:${company.phoneSecondary.replace(/\s/g, '')}`,
     },
     {
       icon: Mail,
@@ -33,8 +35,8 @@ export default function ContactPage() {
     },
     {
       icon: Clock,
-      label: 'Business Hours',
-      value: 'Mon – Sat, 09:00 – 18:00 (GMT+8)',
+      label: 'Postcode',
+      value: company.zip,
     },
   ]
 
