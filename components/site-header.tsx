@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { nav, company } from '@/lib/site'
+import { nav } from '@/lib/site'
 import { isMobileMenuOpen, type MobileMenuState } from '@/lib/navigation'
 
 export function SiteHeader() {
@@ -32,7 +32,7 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5" aria-label={company.name}>
+        <Link href="/" className="flex items-center gap-2.5">
           <span className="flex size-9 items-center justify-center overflow-hidden rounded-lg bg-white/95 shadow-lg ring-1 ring-white/20">
             <Image src="/logo.png" alt="" width={32} height={32} className="object-contain" />
           </span>
