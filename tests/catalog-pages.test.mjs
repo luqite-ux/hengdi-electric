@@ -40,16 +40,20 @@ test('site header keeps mobile compact and uses the larger desktop scale', () =>
   assert.match(header, /size-10.*md:hidden/)
 })
 
-test('hero right-side scene uses seamless ambient industrial light effects', () => {
+test('hero right-side scene uses visible flowing industrial light effects', () => {
   const hero = read('components/hero.tsx')
   const css = read('app/globals.css')
   assert.match(hero, /hero-ambient-light/)
   assert.doesNotMatch(hero, /hero-scan-beam/)
-  assert.equal((hero.match(/hero-energy-marker/g) ?? []).length, 3)
+  assert.doesNotMatch(hero, /hero-energy-marker/)
+  assert.match(hero, /hero-surface-flow/)
+  assert.match(hero, /hero-cabinet-reflection/)
   assert.match(hero, /hero-floor-glow/)
   assert.doesNotMatch(css, /@keyframes hero-scan/)
+  assert.doesNotMatch(css, /hero-energy-pulse/)
   assert.match(css, /@keyframes hero-ambient-breathe/)
-  assert.match(css, /@keyframes hero-energy-pulse/)
+  assert.match(css, /@keyframes hero-surface-flow/)
+  assert.match(css, /@keyframes hero-cabinet-sheen/)
   assert.match(css, /@keyframes hero-floor-breathe/)
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.hero-ambient-light/)
 })

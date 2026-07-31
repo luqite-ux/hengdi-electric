@@ -169,8 +169,8 @@
 }
 
 @keyframes hero-scene-drift {
-  0%, 100% { transform: scale(1.01) translate3d(0, 0, 0); }
-  50% { transform: scale(1.035) translate3d(-0.35%, -0.45%, 0); }
+  0%, 100% { transform: scale(1.015) translate3d(0.35%, 0.25%, 0); }
+  50% { transform: scale(1.045) translate3d(-0.55%, -0.65%, 0); }
 }
 
 @keyframes hero-ambient-breathe {
@@ -178,10 +178,18 @@
   50% { opacity: 0.34; transform: translate3d(-1.5%, -1%, 0) scale(1.04); }
 }
 
-@keyframes hero-energy-pulse {
-  0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
-  20% { opacity: 0.7; }
-  68% { opacity: 0; transform: translate(-50%, -50%) scale(1.55); }
+@keyframes hero-surface-flow {
+  0% { transform: translateX(-110%) skewX(-10deg); opacity: 0; }
+  14% { opacity: 0.5; }
+  58% { opacity: 0.34; }
+  82%, 100% { transform: translateX(125%) skewX(-10deg); opacity: 0; }
+}
+
+@keyframes hero-cabinet-sheen {
+  0%, 12% { transform: translateY(-105%) rotate(9deg); opacity: 0; }
+  30% { opacity: 0.28; }
+  70% { opacity: 0.12; }
+  88%, 100% { transform: translateY(105%) rotate(9deg); opacity: 0; }
 }
 
 @keyframes hero-floor-breathe {
@@ -200,7 +208,7 @@
 }
 
 .motion-scene {
-  animation: hero-scene-drift 14s ease-in-out infinite;
+  animation: hero-scene-drift 12s ease-in-out infinite;
   will-change: transform;
 }
 
@@ -213,33 +221,31 @@
   will-change: transform, opacity;
 }
 
-.hero-energy-marker {
-  width: 7px;
-  height: 7px;
-  border: 1px solid rgb(165 243 252 / 0.62);
-  border-radius: 9999px;
-  background: rgb(34 211 238 / 0.72);
-  box-shadow: 0 0 10px rgb(34 211 238 / 0.58), 0 0 24px rgb(14 165 233 / 0.34);
-}
-
-.hero-energy-marker::before,
-.hero-energy-marker::after {
+.hero-surface-flow::before {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 34px;
-  height: 34px;
+  inset-block: 18%;
+  left: -28%;
+  width: 42%;
   content: '';
-  border: 1px solid rgb(103 232 249 / 0.36);
-  border-radius: 9999px;
-  animation: hero-energy-pulse 3.6s ease-out infinite;
+  background: linear-gradient(90deg, transparent 0%, rgb(125 211 252 / 0.12) 24%, rgb(186 230 253 / 0.38) 50%, rgb(125 211 252 / 0.12) 76%, transparent 100%);
+  filter: blur(12px);
+  mix-blend-mode: screen;
+  animation: hero-surface-flow 7.5s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
-.hero-energy-marker::after {
-  width: 54px;
-  height: 54px;
-  border-color: rgb(56 189 248 / 0.16);
-  animation-delay: 0.8s;
+.hero-cabinet-reflection::before {
+  position: absolute;
+  left: 18%;
+  top: -40%;
+  width: 34%;
+  height: 180%;
+  content: '';
+  background: linear-gradient(90deg, transparent 0%, rgb(125 211 252 / 0.08) 26%, rgb(226 232 240 / 0.22) 50%, rgb(125 211 252 / 0.06) 74%, transparent 100%);
+  filter: blur(16px);
+  mix-blend-mode: screen;
+  animation: hero-cabinet-sheen 9s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .hero-floor-glow {
@@ -285,13 +291,14 @@
   .motion-scene,
   .motion-float,
   .hero-ambient-light,
-  .hero-energy-marker::before,
-  .hero-energy-marker::after,
+  .hero-surface-flow::before,
+  .hero-cabinet-reflection::before,
   .hero-floor-glow {
     animation: none;
   }
   .hero-ambient-light,
-  .hero-energy-marker,
+  .hero-surface-flow,
+  .hero-cabinet-reflection,
   .hero-floor-glow { display: none; }
   .motion-enter { opacity: 1; transform: none; }
   .motion-card::after { display: none; }
