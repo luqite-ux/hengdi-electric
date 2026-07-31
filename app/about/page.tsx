@@ -1,16 +1,17 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Target, Gem, Headphones, Lightbulb } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
 import { company, stats, certifications } from '@/lib/site'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'About Us',
   description:
     'Zhenjiang Hengdi Intelligent Electric Co., Ltd. is an innovative enterprise focused on the intelligent electric field, manufacturing busbar, cable tray and distribution products.',
-}
+  path: '/about',
+})
 
 const values = [
   {

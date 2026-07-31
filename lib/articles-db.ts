@@ -7,6 +7,7 @@ export type Article = {
   content: string
   coverImage: string | null
   publishedAt: string | null
+  updatedAt: string | null
 }
 
 type ArticleRow = {
@@ -16,6 +17,7 @@ type ArticleRow = {
   content: string | null
   featured_image: string | null
   published_at: string | null
+  updated_at: string | null
 }
 
 function mapArticle(row: ArticleRow): Article {
@@ -26,6 +28,7 @@ function mapArticle(row: ArticleRow): Article {
     content: row.content || '',
     coverImage: row.featured_image,
     publishedAt: row.published_at,
+    updatedAt: row.updated_at,
   }
 }
 
@@ -36,7 +39,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
 
   const { data, error } = await supabase
     .from('articles')
-    .select('slug,title,excerpt,content,featured_image,published_at')
+    .select('slug,title,excerpt,content,featured_image,published_at,updated_at')
     .eq('tenant_id', tenantId)
     .eq('is_published', true)
     .order('published_at', { ascending: false })

@@ -7,11 +7,13 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { nav, company } from '@/lib/site'
+import { isMobileMenuOpen, type MobileMenuState } from '@/lib/navigation'
 
 export function SiteHeader() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [menuState, setMenuState] = useState<MobileMenuState>({ pathname, open: false })
+  const open = isMobileMenuOpen(menuState, pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16)
@@ -19,10 +21,6 @@ export function SiteHeader() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  useEffect(() => {
-    setOpen(false)
-  }, [pathname])
 
   return (
     <header
@@ -79,7 +77,7 @@ export function SiteHeader() {
           </Link>
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setMenuState({ pathname, open: !open })}
             className="flex size-10 items-center justify-center rounded-md text-foreground md:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}

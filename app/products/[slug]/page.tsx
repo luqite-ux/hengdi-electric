@@ -7,6 +7,8 @@ import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
 import { products as fallbackProducts } from '@/lib/site'
 import { fetchProductsData, getProductBySlug } from '@/lib/products-db'
+import { JsonLd } from '@/components/json-ld'
+import { buildBreadcrumbJsonLd, buildProductJsonLd, buildProductMetadata } from '@/lib/seo'
 
 export const revalidate = 60
 export const dynamicParams = true
@@ -23,7 +25,7 @@ export async function generateMetadata({
   const { slug } = await params
   const product = await getProductBySlug(slug)
   if (!product) return { title: 'Product Not Found' }
-  return { title: product.name, description: product.description }
+  return buildProductMetadata(product)
 }
 
 export default async function ProductDetailPage({
@@ -40,6 +42,14 @@ export default async function ProductDetailPage({
 
   return (
     <main className="bg-gradient-mesh">
+      <JsonLd data={[
+        buildProductJsonLd(product),
+        buildBreadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Products', path: '/products' },
+          { name: product.name, path: `/products/${product.slug}` },
+        ]),
+      ]} />
       <PageHeader
         eyebrow="Product Series"
         title={product.name}

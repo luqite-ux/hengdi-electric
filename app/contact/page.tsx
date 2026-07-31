@@ -1,15 +1,16 @@
-import type { Metadata } from 'next'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
 import { ContactForm } from '@/components/contact-form'
 import { company } from '@/lib/site'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'Contact',
   description:
     'Contact Hengdi Electric for quotations, samples and OEM/ODM inquiries. Cable tray, busbar trunking and switchgear manufacturer in Zhenjiang, China.',
-}
+  path: '/contact',
+})
 
 export default function ContactPage() {
   const details = [

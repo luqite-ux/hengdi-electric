@@ -5,13 +5,15 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { getArticleBySlug } from '@/lib/articles-db'
+import { JsonLd } from '@/components/json-ld'
+import { buildArticleJsonLd, buildArticleMetadata, buildBreadcrumbJsonLd } from '@/lib/seo'
 
 export const revalidate = 60
 export const dynamicParams = true
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const article = await getArticleBySlug((await params).slug)
-  return article ? { title: article.title, description: article.excerpt } : { title: 'Article Not Found' }
+  return article ? buildArticleMetadata(article) : { title: 'Article Not Found' }
 }
 
 export default async function NewsArticlePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -20,6 +22,14 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
 
   return (
     <main className="bg-gradient-mesh">
+      <JsonLd data={[
+        buildArticleJsonLd(article),
+        buildBreadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'News', path: '/news' },
+          { name: article.title, path: `/news/${article.slug}` },
+        ]),
+      ]} />
       <PageHeader
         eyebrow="News & Insights"
         title={article.title}

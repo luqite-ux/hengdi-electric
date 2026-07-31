@@ -1,18 +1,19 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Check } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
 import { fetchProductsData } from '@/lib/products-db'
+import { buildPageMetadata } from '@/lib/seo'
 
 export const revalidate = 60
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'Products',
   description:
     'Explore Hengdi Electric products: cable tray systems, busbar trunking and switchgear for industrial, commercial and civil power distribution.',
-}
+  path: '/products',
+})
 
 export default async function ProductsPage() {
   const products = await fetchProductsData()

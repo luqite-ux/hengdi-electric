@@ -1,17 +1,18 @@
-import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Newspaper } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
 import { getPublishedArticles } from '@/lib/articles-db'
+import { buildPageMetadata } from '@/lib/seo'
 
 export const revalidate = 60
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'News',
   description: 'Company news, product updates and technical insights from Hengdi Electric.',
-}
+  path: '/news',
+})
 
 export default async function NewsPage() {
   const articles = await getPublishedArticles()

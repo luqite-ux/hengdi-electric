@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import { Manrope, Sora } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { JsonLd } from '@/components/json-ld'
+import { buildOrganizationJsonLd } from '@/lib/seo'
 import './globals.css'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hengdi-electric.vercel.app'
@@ -67,6 +69,7 @@ export default function RootLayout({
     <html lang="en" className={`${sora.variable} ${manrope.variable} bg-background`}>
       <body className="min-h-screen antialiased font-sans">
         <SiteHeader />
+        <JsonLd data={buildOrganizationJsonLd()} />
         {children}
         <SiteFooter />
         {process.env.NODE_ENV === 'production' && <Analytics />}

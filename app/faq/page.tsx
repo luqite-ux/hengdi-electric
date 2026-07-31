@@ -1,16 +1,17 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { PageHeader } from '@/components/page-header'
 import { Reveal } from '@/components/reveal'
 import { FaqAccordion } from '@/components/faq-accordion'
 import { faqCategories } from '@/lib/site'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: 'FAQ',
   description:
     'Frequently asked questions about Hengdi Electric products, pricing, samples, production lead time and quality control.',
-}
+  path: '/faq',
+})
 
 export default function FaqPage() {
   return (

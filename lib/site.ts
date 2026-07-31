@@ -38,6 +38,7 @@ export type Product = {
   short: string
   description: string
   image: string
+  updatedAt?: string | null
   highlights: string[]
   specs: { label: string; value: string }[]
   families?: ProductFamily[]

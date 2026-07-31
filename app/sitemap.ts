@@ -9,11 +9,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [products, articles] = await Promise.all([fetchProductsData(), getPublishedArticles()])
   const routes = ['', '/products', '/news', '/about', '/faq', '/contact']
   return [
-    ...routes.map((route) => ({ url: `${base}${route}`, lastModified: new Date() })),
-    ...products.map((product) => ({ url: `${base}/products/${product.slug}`, lastModified: new Date() })),
+    ...routes.map((route) => ({ url: `${base}${route}` })),
+    ...products.map((product) => ({
+      url: `${base}/products/${product.slug}`,
+      lastModified: product.updatedAt ? new Date(product.updatedAt) : undefined,
+    })),
     ...articles.map((article) => ({
       url: `${base}/news/${article.slug}`,
-      lastModified: article.publishedAt ? new Date(article.publishedAt) : new Date(),
+      lastModified: article.updatedAt
+        ? new Date(article.updatedAt)
+        : article.publishedAt
+          ? new Date(article.publishedAt)
+          : undefined,
     })),
   ]
 }

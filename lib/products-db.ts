@@ -9,6 +9,7 @@ type ProductRow = {
   specs: unknown
   features: unknown
   extra_data: unknown
+  updated_at: string | null
 }
 
 function mapRow(row: ProductRow): Product {
@@ -25,6 +26,7 @@ function mapRow(row: ProductRow): Product {
     short: original.short || row.description || '',
     description: row.description || original.description || '',
     image: row.image_url || original.image || '/placeholder.svg',
+    updatedAt: row.updated_at,
     highlights: Array.isArray(row.features) ? row.features.filter((x): x is string => typeof x === 'string') : (original.highlights || []),
     specs: Array.isArray(row.specs) ? row.specs as Product['specs'] : (original.specs || []),
     families: original.families,
@@ -39,7 +41,7 @@ export async function fetchProductsData(): Promise<Product[]> {
 
   const { data, error } = await supabase
     .from('products')
-    .select('slug,name,description,image_url,specs,features,extra_data')
+    .select('slug,name,description,image_url,specs,features,extra_data,updated_at')
     .eq('tenant_id', tenantId)
     .eq('is_active', true)
     .order('sort_order')
