@@ -32,7 +32,22 @@ def process(source_dir: Path, project_dir: Path) -> None:
             raise FileNotFoundError(source)
 
         with Image.open(source) as original:
-            image = original.convert("RGB").crop(normalized_crop(original, entry["crop"]))
+            if entry.get("crops"):
+                pieces = [original.convert("RGB").crop(normalized_crop(original, crop)) for crop in entry["crops"]]
+                tile_width, tile_height = 720, 440
+                image = Image.new("RGB", (tile_width * 2, tile_height * 2), "white")
+                three_piece_positions = [(0, 0), (tile_width, 0), (tile_width // 2, tile_height)]
+                for index, piece in enumerate(pieces):
+                    piece.thumbnail((tile_width - 48, tile_height - 48), Image.Resampling.LANCZOS)
+                    if len(pieces) == 3:
+                        cell_left, cell_top = three_piece_positions[index]
+                    else:
+                        cell_left, cell_top = (index % 2) * tile_width, (index // 2) * tile_height
+                    left = cell_left + (tile_width - piece.width) // 2
+                    top = cell_top + (tile_height - piece.height) // 2
+                    image.paste(piece, (left, top))
+            else:
+                image = original.convert("RGB").crop(normalized_crop(original, entry["crop"]))
             image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
             image = ImageEnhance.Contrast(image).enhance(1.04)
             image = ImageEnhance.Sharpness(image).enhance(1.08)

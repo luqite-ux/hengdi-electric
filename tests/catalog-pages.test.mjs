@@ -11,9 +11,9 @@ test('public pages use catalog-derived imagery instead of generated showcase ass
   assert.match(pages, /\/catalog\//)
 })
 
-test('products are grouped by verified category and detail pages render galleries', () => {
-  assert.match(read('app/products/page.tsx'), /productCategories/)
-  assert.match(read('app/products/page.tsx'), /p\.category/)
+test('products page renders the six verified series and detail pages render galleries', () => {
+  assert.match(read('app/products/page.tsx'), /products\.map/)
+  assert.doesNotMatch(read('app/products/page.tsx'), /productCategories/)
   assert.match(read('app/products/[slug]/page.tsx'), /product\.gallery/)
 })
 

@@ -9,7 +9,7 @@ const manifestPath = path.join(root, 'scripts', 'catalog-assets.json')
 test('catalog asset manifest is complete and traceable', () => {
   assert.equal(fs.existsSync(manifestPath), true, 'catalog asset manifest must exist')
   const entries = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
-  assert.ok(entries.length >= 25, 'catalog must include product, company, and certificate assets')
+  assert.ok(entries.length >= 16, 'catalog must include six product cards, company, and certificate assets')
 
   const ids = new Set()
   const outputs = new Set()
@@ -28,6 +28,7 @@ test('catalog asset manifest is complete and traceable', () => {
     assert.ok(left >= 0 && top >= 0 && right > left && bottom > top)
     assert.ok(top >= 0.08, `crop must exclude repeated header zone: ${entry.id}`)
     assert.ok(bottom <= 0.94, `crop must exclude repeated footer zone: ${entry.id}`)
+    if (entry.kind === 'product') assert.match(entry.output, /^catalog\/product-cards\//)
   }
 })
 

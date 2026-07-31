@@ -39,7 +39,7 @@ const applications = [
   'Infrastructure',
 ]
 
-const featuredSlugs = ['ladder-cable-tray', 'trough-cable-tray', 'hdcmc-t-copper-busbar', 'hdnhmc-fire-resistant-busbar', 'xl-low-voltage-switchgear', 'pz20-pz30-distribution-board']
+const featuredSlugs = ['cable-tray-series', 'busbar-trunking-series', 'xl-low-voltage-switchgear', 'jxf-switchgear-cabinet', 'sdy-dual-power-distribution-box', 'pz30-distribution-board']
 const featuredProducts = featuredSlugs.map((slug) => products.find((product) => product.slug === slug)).filter((product): product is (typeof products)[number] => Boolean(product))
 
 export default function HomePage() {
@@ -151,7 +151,7 @@ export default function HomePage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="relative overflow-hidden rounded-2xl border border-border/60">
                     <Image
-                      src="/catalog/products/ladder-cable-tray.webp"
+                      src="/catalog/product-cards/cable-tray-series.webp"
                       alt="Cable tray systems"
                       width={420}
                       height={280}
@@ -164,7 +164,7 @@ export default function HomePage() {
                   </div>
                   <div className="relative overflow-hidden rounded-2xl border border-border/60">
                     <Image
-                      src="/catalog/products/hdcmc-t-copper-busbar.webp"
+                      src="/catalog/product-cards/busbar-trunking-series.webp"
                       alt="Busbar trunking systems"
                       width={420}
                       height={280}
@@ -177,7 +177,7 @@ export default function HomePage() {
                   </div>
                   <div className="relative col-span-2 overflow-hidden rounded-2xl border border-border/60">
                     <Image
-                      src="/catalog/products/xl-switchgear.webp"
+                      src="/catalog/product-cards/xl-low-voltage-switchgear.webp"
                       alt="Switchgear and distribution boxes"
                       width={860}
                       height={320}
