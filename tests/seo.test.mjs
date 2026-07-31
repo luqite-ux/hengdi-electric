@@ -58,3 +58,12 @@ test('static page metadata uses its own canonical and social URL', () => {
   assert.equal(metadata.openGraph.url, '/about')
   assert.equal(metadata.twitter.card, 'summary_large_image')
 })
+
+test('private and error pages are explicitly excluded from indexing', () => {
+  assert.equal(typeof seoModule.buildNoIndexMetadata, 'function')
+  const metadata = seoModule.buildNoIndexMetadata('Page not found')
+  assert.equal(metadata.title, 'Page not found')
+  assert.deepEqual(metadata.robots, { index: false, follow: false })
+  assert.equal(metadata.alternates, null)
+  assert.equal(metadata.openGraph, null)
+})

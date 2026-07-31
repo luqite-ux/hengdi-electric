@@ -35,6 +35,16 @@ export function buildPageMetadata({
   }
 }
 
+export function buildNoIndexMetadata(title: string): Metadata {
+  return {
+    title,
+    robots: { index: false, follow: false },
+    alternates: null,
+    openGraph: null,
+    twitter: null,
+  }
+}
+
 export function buildProductMetadata(product: Product): Metadata {
   const path = `/products/${product.slug}`
   const image = product.image || defaultImage

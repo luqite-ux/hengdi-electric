@@ -1,5 +1,8 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { buildNoIndexMetadata } from '@/lib/seo'
+
+export const metadata = buildNoIndexMetadata('Page Not Found')
 
 export default function NotFound() {
   return (
