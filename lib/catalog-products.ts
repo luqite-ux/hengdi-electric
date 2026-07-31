@@ -45,7 +45,7 @@ export const catalogProducts: Product[] = [
     description: 'The XL series is a low-voltage complete switchgear family for AC 50 Hz power and lighting distribution in industrial, commercial, service and civil-building applications.',
     image: '/catalog/product-cards/xl-low-voltage-switchgear.webp', gallery: ['/catalog/product-cards/xl-low-voltage-switchgear.webp'], sourcePages: [71],
     highlights: ['Power and lighting distribution', 'Three-phase three-wire or four-wire project configurations', 'Electrical components selected to project requirements'],
-    specs: [{ label: 'Series', value: 'XL' }, { label: 'Frequency', value: '50 Hz' }, { label: 'Catalog voltage', value: 'Up to 600 V AC' }],
+    specs: [{ label: 'Series', value: 'XL' }, { label: 'Frequency', value: '50 Hz' }, { label: 'Rated voltage', value: 'Up to 600 V AC' }],
   },
   {
     slug: 'jxf-switchgear-cabinet', category: 'Switchgear & Distribution', subcategory: 'JXF Complete Switchgear',
@@ -53,7 +53,7 @@ export const catalogProducts: Product[] = [
     description: 'The JXF series provides control and distribution for electrical equipment with overload, short-circuit and leakage protection configurations for modern building and industrial applications.',
     image: '/catalog/product-cards/jxf-switchgear-cabinet.webp', gallery: ['/catalog/product-cards/jxf-switchgear-cabinet.webp'], sourcePages: [72],
     highlights: ['Welded cabinet construction', 'Multiple enclosure and installation configurations', 'Protection level selected for the installation environment'],
-    specs: [{ label: 'Series', value: 'JXF' }, { label: 'Catalog protection options', value: 'IP30 / IP40 / IP42 / IP55, configuration-dependent' }],
+    specs: [{ label: 'Series', value: 'JXF' }, { label: 'Protection ratings', value: 'IP30 / IP40 / IP42 / IP55, configuration-dependent' }],
   },
   {
     slug: 'sdy-dual-power-distribution-box', category: 'Switchgear & Distribution', subcategory: 'SDY Distribution Box',
@@ -61,7 +61,7 @@ export const catalogProducts: Product[] = [
     description: 'The SDY series is designed for public and commercial locations requiring an emergency or alternate power source, including malls, hospitals, high-rise buildings, airports, ports, hotels and guest facilities.',
     image: '/catalog/product-cards/sdy-dual-power-distribution-box.webp', gallery: ['/catalog/product-cards/sdy-dual-power-distribution-box.webp'], sourcePages: [73],
     highlights: ['Dual-source changeover distribution', 'Box and cabinet structures by current rating', 'Optional monitoring and alarm configurations'],
-    specs: [{ label: 'Series', value: 'SDY' }, { label: 'Catalog changeover ratings', value: '63 A / 100 A / 225 A / 400 A / 630 A, 4P' }],
+    specs: [{ label: 'Series', value: 'SDY' }, { label: 'Rated changeover current', value: '63 A / 100 A / 225 A / 400 A / 630 A, 4P' }],
   },
   {
     slug: 'pz30-distribution-board', category: 'Switchgear & Distribution', subcategory: 'PZ30 Distribution Box',
@@ -69,6 +69,6 @@ export const catalogProducts: Product[] = [
     description: 'The PZ20 and PZ30 catalog family provides compact terminal distribution and protection for electrical equipment in single-phase and three-phase final circuits.',
     image: '/catalog/product-cards/pz30-distribution-box.webp', gallery: ['/catalog/product-cards/pz30-distribution-box.webp'], sourcePages: [74],
     highlights: ['Compact modular terminal distribution', 'Metal, plastic and stainless-steel enclosure variants', 'Surface and flush installation variants'],
-    specs: [{ label: 'Series', value: 'PZ20 / PZ30' }, { label: 'Rated voltage', value: '220 / 380 V' }, { label: 'Catalog load current', value: 'Up to 100 A' }],
+    specs: [{ label: 'Series', value: 'PZ20 / PZ30' }, { label: 'Rated voltage', value: '220 / 380 V' }, { label: 'Rated load current', value: 'Up to 100 A' }],
   },
 ]

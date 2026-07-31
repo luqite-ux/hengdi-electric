@@ -132,8 +132,8 @@ export function ContactForm() {
         <h3 className="mt-5 text-xl font-semibold text-foreground">Submission Failed</h3>
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
           Something went wrong. Please try again or contact us directly at{' '}
-          <a href="mailto:641320694@qq.com" className="text-accent underline underline-offset-2">
-            641320694@qq.com
+          <a href="mailto:info@hengdielectrical.com" className="text-accent underline underline-offset-2">
+            info@hengdielectrical.com
           </a>
           .
         </p>

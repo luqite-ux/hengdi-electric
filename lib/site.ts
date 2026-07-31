@@ -77,7 +77,7 @@ const legacyProducts: Product[] = [
     ],
     specs: [
       { label: 'Material', value: 'Steel (galvanized) / Stainless steel' },
-      { label: 'Width range', value: '50 – 1,200 mm (series/project-dependent)' },
+      { label: 'Width range', value: '50 – 1,200 mm (series-dependent)' },
       { label: 'Height range', value: '60 – 200 mm' },
       { label: 'Monthly output', value: '300 tons' },
     ],
