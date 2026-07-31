@@ -58,6 +58,13 @@
   --radius: 0.75rem;
 }
 
+/* Wide-screen layout: expand the shared 7xl container to 1536px so wide
+   desktops don't squeeze navigation, grids and hero into the center third.
+   Unlayered so it wins over the Tailwind utilities layer. */
+.max-w-7xl {
+  max-width: 96rem;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

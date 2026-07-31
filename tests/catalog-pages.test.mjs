@@ -40,6 +40,11 @@ test('site header keeps mobile compact and scales up on desktop', () => {
   assert.match(header, /size-10.*md:hidden/)
 })
 
+test('global content container is widened to 96rem for large screens', () => {
+  const css = read('app/globals.css')
+  assert.match(css, /\.max-w-7xl\s*\{[^}]*max-width:\s*96rem/, 'globals.css must widen max-w-7xl to 96rem')
+})
+
 test('products page renders the six verified series and detail pages render galleries', () => {
   const productsPage = read('app/products/page.tsx')
   assert.match(productsPage, /products\.map/)
