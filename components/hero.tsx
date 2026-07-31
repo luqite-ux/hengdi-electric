@@ -25,7 +25,7 @@ export function Hero() {
       />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(3,19,41,0.99)_0%,rgba(3,19,41,0.94)_32%,rgba(3,19,41,0.52)_58%,rgba(3,19,41,0.08)_100%)]" />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(3,19,41,0.1)_55%,rgba(3,19,41,0.96)_100%)]" />
-      <div aria-hidden className="hero-scan-beam pointer-events-none absolute bottom-[12%] right-0 top-16 hidden w-[64%] overflow-hidden lg:block" />
+      <div aria-hidden className="hero-ambient-light pointer-events-none absolute -right-[8%] top-[8%] hidden h-[76%] w-[72%] lg:block" />
       <div aria-hidden className="hero-floor-glow pointer-events-none absolute bottom-[11%] right-[1%] hidden h-28 w-[68%] lg:block" />
       <span aria-hidden className="hero-energy-marker pointer-events-none absolute right-[43%] top-[52%] hidden lg:block" />
       <span aria-hidden className="hero-energy-marker pointer-events-none absolute right-[18%] top-[31%] hidden lg:block [animation-delay:0.8s]" />
