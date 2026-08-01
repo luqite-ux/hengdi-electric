@@ -33,8 +33,8 @@ test('homepage hero uses the immersive Hengdi product scene and verified trust c
 
 test('site header keeps mobile compact and uses the larger desktop scale', () => {
   const header = read('components/site-header.tsx')
-  assert.match(header, /h-16[^"\n]*md:h-\[84px\]/)
-  assert.match(header, /size-9[^\n]*md:size-12/)
+  assert.match(header, /logo-icon\.png/)
+  assert.match(header, /h-10[^\n]*md:h-14/)
   assert.match(header, /text-sm[^'\n]*md:text-base/)
   assert.match(header, /md:px-6 md:py-3 md:text-base/)
   assert.match(header, /size-10.*md:hidden/)
