@@ -7,7 +7,7 @@ const proofPoints = ['CCC Certified', 'ISO 9001 Quality System', 'OEM / ODM Avai
 
 const trustPoints = [
   { label: '6 Core Product Series', icon: Layers3 },
-  { label: '1-Year Warranty', icon: ShieldCheck },
+  { label: 'Factory Quality Checks', icon: ShieldCheck },
   { label: 'Approx. 15-Day Lead Time', icon: Clock3 },
   { label: 'Project-Based Quotation', icon: FileCheck2 },
 ]

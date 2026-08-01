@@ -300,7 +300,7 @@ export const faqCategories = [
       },
       {
         q: 'What is the expected service life of your products?',
-        a: 'Products carry a one-year quality warranty. Under normal operating conditions, service life typically exceeds five years; actual life depends on the installation environment and usage conditions.',
+        a: 'Under normal operating conditions, service life typically exceeds five years; actual life depends on the installation environment and usage conditions.',
       },
     ],
   },
@@ -372,11 +372,11 @@ export const faqCategories = [
       },
       {
         q: 'What happens if a quality issue arises?',
-        a: 'Goods are only dispatched after passing our factory inspection. If a quality issue is identified, it is resolved before shipment. After delivery, quality issues within the warranty period are handled promptly.',
+        a: 'Goods are only dispatched after passing our factory inspection. If a quality issue is identified, it is resolved before shipment. After delivery, technical support requests are handled promptly under the terms confirmed in the order documentation.',
       },
       {
-        q: 'What is the warranty period?',
-        a: 'All products carry a one-year quality warranty from the date of delivery.',
+        q: 'What post-delivery technical support is available?',
+        a: 'Technical support is available after delivery. The applicable scope and commercial terms are confirmed in the order documentation.',
       },
     ],
   },
