@@ -33,8 +33,14 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 md:h-[84px] lg:px-8">
-        <Link href="/" className="flex items-center">
-          <Image src="/logo-icon.png" alt="Hengdi Electric" width={64} height={64} className="h-10 w-auto md:h-14" priority />
+        <Link href="/" className="flex items-center gap-2.5 md:gap-3.5">
+          <Image src="/logo-icon.png" alt="Hengdi Electric" width={64} height={64} className="h-9 w-auto md:h-12" priority />
+          <span className="flex flex-col leading-none">
+            <span className={cn('text-sm font-bold tracking-tight md:text-base', overDarkHero ? 'text-white' : 'text-foreground')}>Hengdi Electric</span>
+            <span className={cn('text-[10px] font-medium uppercase tracking-[0.18em]', overDarkHero ? 'text-white/65' : 'text-muted-foreground')}>
+              Intelligent Electric
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex lg:gap-3">
