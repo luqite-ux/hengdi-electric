@@ -46,7 +46,7 @@ export function PageHeader({
             {eyebrow}
           </span>
         )}
-        <h1 className="motion-enter mt-3 max-w-3xl text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl" style={{ animationDelay: '150ms' }}>
+        <h1 className="motion-enter mt-3 max-w-6xl text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl" style={{ animationDelay: '150ms' }}>
           {title}
         </h1>
         {description && (
