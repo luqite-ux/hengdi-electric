@@ -44,7 +44,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
             maskImage: 'radial-gradient(ellipse 60% 100% at 30% 0%, black, transparent 70%)',
           }}
         />
-        <div className="relative mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+        <div className="relative mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
           <nav className="motion-enter mb-5 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <Link href="/" className="transition-colors hover:text-foreground">Home</Link>
             <span>/</span>
@@ -53,15 +53,15 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
           <span className="motion-enter inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent" style={{ animationDelay: '80ms' }}>
             News &amp; Insights
           </span>
-          <h1 className="motion-enter mt-4 text-wrap text-3xl font-bold leading-tight tracking-normal text-foreground sm:text-4xl lg:text-[2.75rem]" style={{ animationDelay: '150ms' }}>
+          <h1 className="motion-enter mt-4 text-wrap text-[1.75rem] font-bold leading-tight tracking-normal text-foreground sm:text-[2rem] lg:text-4xl" style={{ animationDelay: '150ms' }}>
             {article.title}
           </h1>
-          <div className="motion-enter mt-5 flex flex-wrap items-center gap-3 text-sm text-muted-foreground" style={{ animationDelay: '220ms' }}>
+          <div className="motion-enter mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground" style={{ animationDelay: '220ms' }}>
             {publishedDate && <time dateTime={article.publishedAt ?? undefined}>{publishedDate}</time>}
             <span>Hengdi Electric</span>
           </div>
           {article.excerpt && (
-            <p className="motion-enter mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg" style={{ animationDelay: '260ms' }}>
+            <p className="motion-enter mt-4 text-base leading-relaxed text-muted-foreground" style={{ animationDelay: '260ms' }}>
               {article.excerpt}
             </p>
           )}
