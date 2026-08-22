@@ -4,16 +4,18 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 import { nav, company, products } from '@/lib/site'
 
 export function SiteFooter() {
+  const footerCompanyName = company.fullName.replace(/[.\s]+$/, '')
+
   return (
     <footer className="relative mt-24 border-t border-border/60 bg-background/60">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="lg:col-span-1">
-          <div className="flex items-center gap-2.5">
-            <span className="flex size-9 items-center justify-center overflow-hidden rounded-lg bg-white/95">
-              <Image src="/logo.png" alt="" width={32} height={32} className="object-contain" />
+          <Link href="/" aria-label="Hengdi Electric home" className="flex w-fit items-center gap-2.5">
+            <span className="flex size-12 items-center justify-center overflow-hidden rounded-lg bg-white/95">
+              <Image src="/logo.png" alt="" width={44} height={44} className="max-w-full object-contain" />
             </span>
             <span className="text-sm font-bold text-foreground">Hengdi Electric</span>
-          </div>
+          </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
             {company.fullName} — a professional manufacturer of cable tray, busbar trunking and
             switchgear.
@@ -83,7 +85,7 @@ export function SiteFooter() {
       <div className="border-t border-border/60">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
           <p>
-            © {new Date().getFullYear()} {company.fullName} All rights reserved.
+            © {new Date().getFullYear()} {footerCompanyName}. All rights reserved.
           </p>
           <p>ISO 9001 Quality System · CCC &amp; Type-Test Reports Available for Busbar Systems</p>
         </div>

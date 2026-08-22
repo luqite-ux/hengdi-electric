@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
+import { Send, CheckCircle2, Loader2 } from 'lucide-react'
+import { InquiryCaptchaField } from '@/components/inquiry-captcha-field'
 import { products } from '@/lib/site'
 
 const COUNTRIES = [
@@ -29,6 +30,8 @@ export function ContactForm() {
   const [formState, setFormState] = useState<FormState>('idle')
   const [errors, setErrors] = useState<FieldErrors>({})
   const [touched, setTouched] = useState<Record<string, boolean>>({})
+  const [submitError, setSubmitError] = useState('')
+  const [captchaRefreshKey, setCaptchaRefreshKey] = useState(0)
 
   const baseInput =
     'w-full rounded-xl border bg-secondary/40 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:ring-2'
@@ -70,6 +73,7 @@ export function ContactForm() {
     }
     setErrors({})
     setFormState('submitting')
+    setSubmitError('')
     const country = String(fd.get('country') || '').trim()
     const product = String(fd.get('product') || '').trim()
     const specs = String(fd.get('specs') || '').trim()
@@ -81,24 +85,36 @@ export function ContactForm() {
       '',
       message,
     ].filter(Boolean).join('\n')
-    const response = await fetch('/api/inquiries', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: String(fd.get('name') || '').trim(),
-        company: String(fd.get('company') || '').trim(),
-        email: String(fd.get('email') || '').trim(),
-        phone: String(fd.get('phone') || '').trim(),
-        subject: product ? `Product inquiry: ${product}` : 'General product inquiry',
-        message: details,
-      }),
-    })
-    if (!response.ok) {
+    try {
+      const response = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: String(fd.get('name') || '').trim(),
+          company: String(fd.get('company') || '').trim(),
+          email: String(fd.get('email') || '').trim(),
+          phone: String(fd.get('phone') || '').trim(),
+          subject: product ? `Product inquiry: ${product}` : 'General product inquiry',
+          message: details,
+          captchaToken: String(fd.get('captchaToken') || ''),
+          captchaAnswer: String(fd.get('captchaAnswer') || ''),
+          captchaScope: String(fd.get('captchaScope') || ''),
+        }),
+      })
+      if (!response.ok) {
+        const result = (await response.json().catch(() => ({}))) as { error?: string }
+        setSubmitError(result.error || 'Unable to submit your inquiry. Please try again.')
+        setCaptchaRefreshKey((current) => current + 1)
+        setFormState('error')
+        return
+      }
+      e.currentTarget.reset()
+      setFormState('success')
+    } catch {
+      setSubmitError('Unable to submit your inquiry. Please try again.')
+      setCaptchaRefreshKey((current) => current + 1)
       setFormState('error')
-      return
     }
-    e.currentTarget.reset()
-    setFormState('success')
   }
 
   if (formState === 'success') {
@@ -118,31 +134,6 @@ export function ContactForm() {
           className="mt-6 rounded-full border border-border/80 bg-secondary/40 px-6 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
         >
           Send another inquiry
-        </button>
-      </div>
-    )
-  }
-
-  if (formState === 'error') {
-    return (
-      <div className="flex flex-col items-center justify-center rounded-3xl border border-red-400/40 bg-card/50 p-10 text-center backdrop-blur">
-        <div className="flex size-16 items-center justify-center rounded-full bg-red-400/10">
-          <AlertCircle className="size-8 text-red-500" />
-        </div>
-        <h3 className="mt-5 text-xl font-semibold text-foreground">Submission Failed</h3>
-        <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-          Something went wrong. Please try again or contact us directly at{' '}
-          <a href="mailto:info@hengdielectrical.com" className="text-accent underline underline-offset-2">
-            info@hengdielectrical.com
-          </a>
-          .
-        </p>
-        <button
-          type="button"
-          onClick={() => { setFormState('idle'); setTouched({}); setErrors({}) }}
-          className="mt-6 rounded-full border border-border/80 bg-secondary/40 px-6 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
-        >
-          Try again
         </button>
       </div>
     )
@@ -302,6 +293,9 @@ export function ContactForm() {
       <p className="mt-3 text-xs text-muted-foreground">
         Fields marked <span className="text-accent">*</span> are required.
       </p>
+
+      <InquiryCaptchaField refreshKey={captchaRefreshKey} className="mt-5" />
+      {submitError && <p role="alert" className="mt-4 text-sm text-red-500">{submitError}</p>}
 
       <button
         type="submit"
